@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MohammadReza Azdast — Desktop App Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0f14;
+      --bg2:       #13161e;
+      --bg3:       #1a1e28;
+      --border:    rgba(255,255,255,0.07);
+      --border2:   rgba(255,255,255,0.13);
+      --accent:    #5b7cf6;
+      --accent2:   #8fa8ff;
+      --text:      #e8eaf0;
+      --muted:     #8a90a0;
+      --mono:      'DM Mono', monospace;
+      --serif:     'DM Serif Display', serif;
+      --sans:      'Outfit', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(91,124,246,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(91,124,246,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Global link reset ── */
+    a {
+      text-decoration: none;
+      position: relative;
+      color: inherit;
+    }
+
+    /* ── Nav underline on hover (nav links only) ── */
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 1px;
+      background: var(--accent2);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 3rem;
+      background: rgba(13,15,20,0.75);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--accent2);
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    section { position: relative; z-index: 1; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 7rem 0 4rem;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em { font-style: italic; color: var(--accent2); }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border2);
+    }
+
+    .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+
+    /* ── PHOTO ── */
+    .photo-frame {
+      position: relative;
+      width: 280px;
+      height: 360px;
+      margin: 0 auto;
+    }
+
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--accent), transparent 60%);
+      z-index: -1;
+    }
+
+    .photo-box {
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-corner {
+      position: absolute;
+      width: 16px; height: 16px;
+      border-color: var(--accent);
+      border-style: solid;
+      opacity: 0.6;
+      z-index: 1;
+    }
+    .photo-corner.tl { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+    .photo-corner.br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+
+    /* ── TAGS ── */
+    .stack-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.73rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 4px;
+      border: 1px solid var(--border2);
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .tag.highlight {
+      border-color: rgba(91,124,246,0.4);
+      color: var(--accent2);
+      background: rgba(91,124,246,0.07);
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header { margin-bottom: 3rem; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.1;
+    }
+
+    .section-title em { font-style: italic; color: var(--accent2); }
+
+    /* ── ABOUT ── */
+    #about { padding: 7rem 0; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 1rem; }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      transition: border-color 0.2s;
+    }
+
+    .stat-card:hover { border-color: var(--border2); }
+
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      color: var(--accent2);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── SKILLS ── */
+    #skills { padding: 7rem 0; background: var(--bg2); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .skill-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+    .skill-card:hover::before { opacity: 1; }
+
+    .skill-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: rgba(91,124,246,0.1);
+      border: 1px solid rgba(91,124,246,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .skill-name { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .skill-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+    .skill-level { display: flex; gap: 4px; margin-top: 1rem; }
+
+    .level-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border2);
+    }
+
+    .level-dot.filled { background: var(--accent); }
+
+    /* ── PROJECTS ── */
+    #projects { padding: 7rem 0; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .project-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .project-icon { font-size: 1.5rem; line-height: 1; }
+
+    .project-link {
+      color: var(--muted);
+      font-size: 1.1rem;
+      transition: color 0.2s;
+    }
+
+    .project-link:hover { color: var(--accent2); }
+
+    .project-name { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.4rem; }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: auto; }
+
+    /* ── EXPERIENCE ── */
+    #experience { padding: 7rem 0; background: var(--bg2); }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 2.8rem 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -4px; top: 6px;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(91,124,246,0.15);
+    }
+
+    .timeline-date {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-role { font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .timeline-company { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.5rem; }
+
+    .timeline-url {
+      display: inline-block;
+      font-size: 0.82rem;
+      color: var(--accent2);
+      margin-bottom: 0.8rem;
+    }
+
+    .timeline-url:hover { text-decoration: underline; }
+
+    .timeline-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── CONTACT ── */
+    #contact { padding: 7rem 0; }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-desc { color: var(--muted); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem; }
+
+    .contact-links { display: flex; flex-direction: column; gap: 0.9rem; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover { color: var(--accent2); }
+
+    .contact-link-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--border2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .form-group label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+
+    .form-group textarea { min-height: 120px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    footer span { color: var(--accent2); }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .photo-frame { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">MohammadReza Azdast</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+
+        <div>
+          <p class="hero-eyebrow">Desktop App Developer</p>
+          <h1>
+            Building native<br />
+            apps that <em>feel</em><br />
+            right at home.
+          </h1>
+          <p class="hero-desc">
+            I craft polished, performant desktop applications using WPF and Avalonia — focused on clean architecture, great UX, and code that's a pleasure to maintain.
+          </p>
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary">View My Work →</a>
+            <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+          </div>
+          <div class="stack-row">
+            <span class="tag highlight">WPF</span>
+            <span class="tag highlight">Avalonia UI</span>
+            <span class="tag highlight">C# / .NET</span>
+            <span class="tag highlight">XAML</span>
+            <span class="tag">MVVM</span>
+            <span class="tag">HTML</span>
+          </div>
+        </div>
+
+        <div class="photo-frame">
+          <div class="photo-box">
+            <div class="photo-corner tl"></div>
+            <div class="photo-corner br"></div>
+            <img src="/images/ddf15dd2-f3c7-4e3e-a2b8-65d570591f3d.jpg" alt="MohammadReza Azdast" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label">01 — About</p>
+        <h2 class="section-title">A little bit<br /><em>about me</em></h2>
+      </div>
+      <div class="about-grid">
+
+        <div class="about-text fade-up">
+          <p>
+            Hi, I'm <strong>MohammadReza Azdast</strong> — a desktop application developer passionate about building software that lives on the Windows (and cross-platform!) desktop. I've been writing C# since <strong>2023</strong>, and I love the challenge of making complex features feel simple to the user.
+          </p>
+          <p>
+            My go-to tools are <strong>WPF</strong> for Windows-first apps and <strong>Avalonia UI</strong> when I need to target multiple platforms. I care deeply about the MVVM pattern, clean separation of concerns, and UIs that are both beautiful and accessible.
+          </p>
+          <p>
+            Outside of code I enjoy <strong>Calisthenics</strong>, <strong>Problem solving</strong>, and reading about software architecture. I'm currently expanding my skills into <strong>web development</strong> — HTML, CSS, and JavaScript.
+          </p>
+          <a href="#contact" class="btn btn-ghost" style="margin-top:1rem; display:inline-flex;">Let's work together →</a>
+        </div>
+
+        <div class="stats-grid fade-up">
+          <div class="stat-card">
+            <div class="stat-number">3+</div>
+            <div class="stat-label">Years of experience</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">12+</div>
+            <div class="stat-label">Projects delivered</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2</div>
+            <div class="stat-label">UI frameworks mastered</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Bugs squashed</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label">02 — Skills</p>
+        <h2 class="section-title">Tools &amp; <em>technologies</em></h2>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skill-card fade-up">
+          <div class="skill-icon">🖼</div>
+          <div class="skill-name">WPF</div>
+          <div class="skill-desc">Windows Presentation Foundation — building rich, data-bound desktop UIs with XAML and C# for the Windows ecosystem.</div>
+          <div class="skill-level">
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot"></div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-up">
+          <div class="skill-icon">🔷</div>
+          <div class="skill-name">Avalonia UI</div>
+          <div class="skill-desc">Cross-platform XAML framework for .NET — ship the same app to Windows, macOS, and Linux from one codebase.</div>
+          <div class="skill-level">
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot"></div>
+            <div class="level-dot"></div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-up">
+          <div class="skill-icon">⚙️</div>
+          <div class="skill-name">C# &amp; .NET</div>
+          <div class="skill-desc">Primary language for all desktop work — async/await, LINQ, generics, DI, and the broader .NET ecosystem.</div>
+          <div class="skill-level">
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot"></div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-up">
+          <div class="skill-icon">🏗</div>
+          <div class="skill-name">MVVM Pattern</div>
+          <div class="skill-desc">Model-View-ViewModel architecture, commanding, data binding, and dependency injection using CommunityToolkit.Mvvm.</div>
+          <div class="skill-level">
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot"></div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-up">
+          <div class="skill-icon">🌐</div>
+          <div class="skill-name">HTML &amp; Web</div>
+          <div class="skill-desc">Currently learning CSS and JavaScript to round out full-stack knowledge — comfortable with semantic HTML and responsive layouts.</div>
+          <div class="skill-level">
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot"></div>
+            <div class="level-dot"></div>
+            <div class="level-dot"></div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-up">
+          <div class="skill-icon">🗄</div>
+          <div class="skill-name">Data &amp; Storage</div>
+          <div class="skill-desc">SQLite, Entity Framework Core, and REST API integration inside desktop apps. Keeping local data fast and reliable.</div>
+          <div class="skill-level">
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot"></div>
+            <div class="level-dot"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label">03 — Projects</p>
+        <h2 class="section-title">Things I've <em>built</em></h2>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card fade-up">
+          <div class="project-header">
+            <div class="project-icon">📋</div>
+            <a href="#" class="project-link" title="View project">↗</a>
+          </div>
+          <div class="project-name">Hotel Managing App</div>
+          <div class="project-desc">
+            A simple app for managing a hotel. Built as an early project to practice C# and Windows Forms — UI is in Persian.
+          </div>
+          <div class="project-tags">
+            <span class="tag">Windows Forms</span>
+            <span class="tag">C#</span>
+          </div>
+        </div>
+
+        <div class="project-card fade-up">
+          <div class="project-header">
+            <div class="project-icon">🫁</div>
+            <a href="#" class="project-link" title="View project">↗</a>
+          </div>
+          <div class="project-name">Box Breathing App</div>
+          <div class="project-desc">
+            A calm, minimal app to guide users through the box breathing technique — inhale, hold, exhale, hold — for stress relief and focus.
+          </div>
+          <div class="project-tags">
+            <span class="tag">Avalonia</span>
+            <span class="tag">C#</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label">04 — Experience</p>
+        <h2 class="section-title">Where I've <em>worked</em></h2>
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item fade-up">
+          <div class="timeline-date">2026 — Present</div>
+          <div class="timeline-role">Desktop Application Developer</div>
+          <div class="timeline-company">nhazerakhsh · Full-time</div>
+          <a href="https://nhazerakhsh.ir" class="timeline-url" target="_blank">nhazerakhsh.ir ↗</a>
+          <div class="timeline-desc">
+            Designing and shipping internal WPF tools for the company. Currently working on migrating existing projects to .NET 10 and improving UI consistency across the product line.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label">05 — Contact</p>
+        <h2 class="section-title">Let's <em>talk</em></h2>
+      </div>
+      <div class="contact-inner">
+
+        <div class="fade-up">
+          <p class="contact-desc">
+            Whether you have a project in mind, want to collaborate, or just want to talk desktop development — my inbox is open.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:azdast120@gmail.com" class="contact-link">
+              <div class="contact-link-icon">✉</div>
+              azdast120@gmail.com
+            </a>
+            <a href="https://github.com/Azdast" class="contact-link" target="_blank">
+              <div class="contact-link-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+                </svg>
+              </div>
+              github.com/Azdast
+            </a>
+            <a href="https://www.linkedin.com/in/mohammadreza-azdast-591270323/" class="contact-link" target="_blank">
+              <div class="contact-link-icon">in</div>
+              linkedin.com/in/MohammadReza-Azdast
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-form fade-up">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Ali Azdast" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Azdast@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Hi, I'd love to chat about…"></textarea>
+          </div>
+          <button class="btn btn-primary" onclick="handleSubmit()" style="width:100%; justify-content:center;">Send message →</button>
+          <p id="form-status" style="font-size:0.82rem; color:var(--muted); text-align:center; min-height:1.2rem;"></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>Designed &amp; built by <span>MohammadReza Azdast</span> · <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const siblings = [...e.target.parentElement.querySelectorAll('.fade-up')];
+          const idx = siblings.indexOf(e.target);
+          e.target.style.transitionDelay = (idx * 80) + 'ms';
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    function handleSubmit() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('message').value.trim();
+      const status = document.getElementById('form-status');
+
+      if (!name || !email || !msg) {
+        status.style.color = '#f08080';
+        status.textContent = 'Please fill in all fields.';
+        return;
+      }
+
+      status.style.color = 'var(--accent2)';
+      status.textContent = "✓ Message sent! I'll get back to you soon.";
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('message').value = '';
+    }
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
+      });
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
