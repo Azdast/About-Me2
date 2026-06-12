@@ -12,10 +12,10 @@ A modern, responsive personal portfolio website built with **HTML, CSS, and Java
 ## 📸 Preview
 
 ### 🖥️ Hero Section
-![Hero](/images/Screenshot%202026-06-13%20at%2001-00-53%20MohammadReza%20Azdast%20—%20Desktop%20App%20Developer.png)
+![Hero](/images/Screenshot%202026-06-13%20at%2001-09-09%20MohammadReza%20Azdast%20—%20Desktop%20App%20Developer.png)
 
 ### 📄 Full Page View
-![Full Page](/images/Screenshot%202026-06-13%20at%2001-09-09%20MohammadReza%20Azdast%20—%20Desktop%20App%20Developer.png)
+![Full Page](/images/Screenshot%202026-06-13%20at%2001-00-53%20MohammadReza%20Azdast%20—%20Desktop%20App%20Developer.png)
 
 ---
 
