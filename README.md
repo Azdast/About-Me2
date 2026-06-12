@@ -6,10 +6,8 @@ A modern, responsive personal portfolio website built with **HTML, CSS, and Java
 
 ## 📸 Preview
 
----
-
 ### 📄 Full Page View
-![Full Page](/images/Screenshot%202026-06-13%20at%2001-00-53%20MohammadReza%20Azdast%20—%20Desktop%20App%20Developer.png)
+![Full Page](/images/fullpage.png)
 
 ---
 
@@ -37,10 +35,11 @@ A modern, responsive personal portfolio website built with **HTML, CSS, and Java
 ## 📂 Project Structure
 
 ```
-/images
-index.html
-style.css
-script.js
+/
+  index.html
+  style.css
+  script.js
+  /images
 ```
 
 ---
@@ -60,5 +59,5 @@ script.js
 **MohammadReza Azdast**
 
 - GitHub: https://github.com/Azdast
-- LinkedIn: [your-link](https://www.linkedin.com/in/mohammadreza-azdast-591270323/?isSelfProfile=true)
+- LinkedIn: https://www.linkedin.com/in/mohammadreza-azdast-591270323
 - Email: mailto:azdast120@gmail.com
