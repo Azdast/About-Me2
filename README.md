@@ -4,15 +4,9 @@ A modern, responsive personal portfolio website built with **HTML, CSS, and Java
 
 ---
 
-## 🚀 Live Demo
-👉 https://your-live-site-link.com
-
----
-
 ## 📸 Preview
 
-### 🖥️ Hero Section
-![Hero](/images/Screenshot%202026-06-13%20at%2001-09-09%20MohammadReza%20Azdast%20—%20Desktop%20App%20Developer.png)
+---
 
 ### 📄 Full Page View
 ![Full Page](/images/Screenshot%202026-06-13%20at%2001-00-53%20MohammadReza%20Azdast%20—%20Desktop%20App%20Developer.png)
@@ -51,14 +45,6 @@ script.js
 
 ---
 
-## 📷 Screenshots Tip
-
-To capture full page screenshots:
-- Use Chrome DevTools → “Capture full size screenshot”
-- Or GoFullPage extension
-
----
-
 ## 📈 What I Learned
 
 - Structuring large frontend projects
@@ -74,9 +60,5 @@ To capture full page screenshots:
 **MohammadReza Azdast**
 
 - GitHub: https://github.com/Azdast
-- LinkedIn: your-link
+- LinkedIn: [your-link](https://www.linkedin.com/in/mohammadreza-azdast-591270323/?isSelfProfile=true)
 - Email: mailto:azdast120@gmail.com
-
----
-
-⭐ If you like this project, feel free to star it!
